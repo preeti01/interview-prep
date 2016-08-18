@@ -1,0 +1,310 @@
+#include <stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int data;
+    struct node*next;
+};
+
+void push(struct node**headref,int item)
+{
+    struct node* newnode= malloc(sizeof(struct node));
+    newnode->data=item;
+    newnode->next=*headref;
+    *headref=newnode;
+}
+void removeduplicate(struct node* headref)
+{
+    struct node*current= headref;
+    struct node*nextnext;
+    while(current->next!=NULL)
+    {
+        nextnext=current->next->next;
+        if(current->data==current->next->data)
+        {
+            free(current->next);
+            current->next=nextnext;
+        }
+        else
+        current=current->next;
+    }
+}
+int main()
+{
+    struct node*headref =NULL;
+    push(&headref,7);
+    push(&headref,7);
+    push(&headref,9);
+    removeduplicate(headref);
+    struct node*current=headref;
+    while(current!=NULL)
+    {
+        printf("%d",current->data);
+        current=current->next;
+    }
+    
+    return 0;
+}
+
+
+#include <stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int data;
+    struct node*next;
+};
+
+void push(struct node**headref,int item)
+{
+    struct node* newnode= malloc(sizeof(struct node));
+    newnode->data=item;
+    newnode->next=*headref;
+    *headref=newnode;
+}
+
+struct node* reverse(struct node* headref)
+{
+    struct node* result=NULL;
+    struct node*current=headref;
+    struct node* next;
+    while(current!=NULL)
+    {
+    next=current->next;
+    push(&result,current->data);
+    current=next;
+    }
+    return result;
+}    
+
+int main()
+{
+    struct node*headref =NULL;
+    push(&headref,7);
+    push(&headref,7);
+    push(&headref,9);
+    struct node*current=headref;
+    while(current!=NULL)
+    {
+        printf("%d",current->data);
+        current=current->next;
+    }
+    struct node* result=reverse(headref);
+    struct node*newlist=result;
+    
+    printf("newlist:")
+    while(newlist!=NULL)
+    {
+        printf(" %d",newlist->data);
+        newlist=newlist->next;
+    }
+   
+    return 0;
+}
+
+
+
+#include <stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int data;
+    struct node*next;
+};
+
+void push(struct node**headref,int item)
+{
+    struct node* newnode= malloc(sizeof(struct node));
+    newnode->data=item;
+    newnode->next=*headref;
+    *headref=newnode;
+}
+    
+int ktolast(struct node*headref,int k)
+{
+  struct node*current=headref;
+  int count=0;
+  int l=length(headref);
+  printf("length:%d\n",l);
+  while(current!=NULL)
+  {
+    if(count==l-k-1)
+    {
+        return current->data;
+    }
+    else
+    {
+        current=current->next;
+        count++;
+    }
+   }
+ }
+
+int length(struct node*headref)
+{
+   struct node*current=headref;
+   int length=0;
+    while(current!=NULL)
+    {
+        
+        length++;
+        current=current->next;
+    } 
+    return length;
+}
+void traverse(struct node*headref)
+{
+   struct node*current=headref;
+  
+    while(current!=NULL)
+    {
+        printf("%d",current->data);
+        current=current->next;
+    } 
+  
+}
+int main()
+{
+    struct node*headref =NULL;
+    push(&headref,7);
+    push(&headref,7);
+    push(&headref,9);
+    push(&headref,5);
+    traverse(headref);
+
+    /*struct node* result=reverse(headref);
+    struct node*newlist=result;
+    
+    printf("newlist:");
+    while(newlist!=NULL)
+    {
+        printf(" %d",newlist->data);
+        newlist=newlist->next;
+    }
+    //removeduplicate(headref);
+
+    while(current!=NULL)
+    {
+        printf("%d",current->data);
+        current=current->next;
+    }*/
+    int kthfromlast=ktolast(headref,3);
+    printf("%d",kthfromlast);
+    return 0;
+}
+
+8.
+deletemid node
+#include <stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int data;
+    struct node*next;
+};
+
+void push(struct node**headref,int item)
+{
+    struct node* newnode= malloc(sizeof(struct node));
+    newnode->data=item;
+    newnode->next=*headref;
+    *headref=newnode;
+}
+void removeduplicate(struct node* headref)
+{
+    struct node*current= headref;
+    struct node*nextnext;
+    while(current->next!=NULL)
+    {
+        nextnext=current->next->next;
+        if(current->data==current->next->data)
+        {
+            free(current->next);
+            current->next=nextnext;
+        }
+        else
+        current=current->next;
+    }
+}
+struct node* reverse(struct node* headref)
+{
+    struct node* result=NULL;
+    struct node*current=headref;
+    struct node* next;
+    while(current!=NULL)
+    {
+    next=current->next;
+    push(&result,current->data);
+    current=next;
+    }
+    return result;
+}    
+int ktolast(struct node*headref,int k)
+{
+  struct node*current=headref;
+  int count=0;
+  int l=length(headref);
+  printf("length:%d\n",l);
+  while(current!=NULL)
+  {
+   if(count==l-k-1)
+   {
+    return current->data;
+   }
+   else
+   {
+   current=current->next;
+  // printf("%d",count);
+   count++;
+   }
+  }
+  }
+void deletemidnode(struct node* n1)
+{
+    if(n1==NULL && n1->next==NULL)
+    printf("can't delete");
+    else
+    {
+    struct node* next=n1->next;
+    n1->data=next->data;
+    n1->next=next->next;
+    }
+    
+}
+int length(struct node*headref)
+{
+   struct node*current=headref;
+   int length=0;
+    while(current!=NULL)
+    {
+        //printf("%d",current->data);
+        length++;
+        current=current->next;
+    } 
+    return length;
+}
+void traverse(struct node*headref)
+{
+   struct node*current=headref;
+    while(current!=NULL)
+    {
+        printf("%d",current->data);
+        current=current->next;
+    } 
+  
+}
+int main()
+{
+    struct node*headref =NULL;
+    push(&headref,7);
+    push(&headref,7);
+    push(&headref,9);
+    push(&headref,5);
+    traverse(headref);
+
+
+  
+   printf("\nafter deletiing\n");
+    deletemidnode(headref->next);
+    traverse(headref);
+    return 0;
